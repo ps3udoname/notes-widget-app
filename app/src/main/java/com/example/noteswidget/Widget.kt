@@ -3,10 +3,8 @@ package com.example.noteswidget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
 
 
@@ -25,25 +23,6 @@ class Widget : AppWidgetProvider() {
         }
     }
 
-//    override fun onReceive(context: Context?, intent: Intent?) {
-//        super.onReceive(context, intent)
-////        println("dnsof")
-////        println(intent?.action)
-//            Log.d("onReceive", "onReceiveudasbdh")
-//
-//            val extras = intent?.extras
-//            if (extras != null) {
-//                val appWidgetManager = AppWidgetManager.getInstance(context)
-//                val thisAppWidget = ComponentName(
-//                    context!!.packageName,
-//                    Widget::class.java.getName()
-//                )
-//                val appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget)
-//
-//                onUpdate(context, appWidgetManager, appWidgetIds)
-//
-//    }
-//}
 
 internal fun updateAppWidget(
     context: Context,
@@ -64,26 +43,15 @@ internal fun updateAppWidget(
         context.packageName,
         R.layout.widget
     ).apply {
+        //launch the activity if textview is clicked
         setOnClickPendingIntent(R.id.appwidget_text, pendingIntent)
+        //update the text on the textview
         setTextViewText(R.id.appwidget_text, FileManager.loadtext(context))
     }
-    Log.d("onUpdate", "onUPdateudasbdh")
     // Tell the AppWidgetManager to perform an update on the current
     // widget.
     appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 
 }
-//fun updateButtonTextView(context: Context, appWidgetId: Int) {
-//    val appWidgetManager = AppWidgetManager.getInstance(context)
-//    val remoteViews = RemoteViews(context.getPackageName(), R.layout.widget).also {
-//        setTextViewText(R.id.appwidget_Button, "Updated text1")
-//    }
-//    appWidgetManager.updateAppWidget(appWidgetId, remoteViews)
-//}
-//
-//fun getRefreshPendingIntent(context: Context?, appWidgetId: Int): PendingIntent {
-//    val intent = Intent("my.package.ACTION_UPDATE_WIDGET")
-//    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
-//    return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-//}
+

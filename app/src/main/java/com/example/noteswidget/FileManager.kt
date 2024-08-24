@@ -22,7 +22,12 @@ class FileManager {
             return try {
                 context.openFileInput(fileName).bufferedReader().useLines { lines ->
                     lines.fold("") { some, text ->
-                        "$some\n$text"
+                        //if on first line only return text
+                        if (some.isEmpty()) {
+                            text
+                        } else {
+                            "$some\n$text"
+                        }
                     }
                 }
 
