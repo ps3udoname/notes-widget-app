@@ -20,16 +20,7 @@ class FileManager {
 
         fun loadtext(context : Context): String {
             return try {
-                context.openFileInput(fileName).bufferedReader().useLines { lines ->
-                    lines.fold("") { some, text ->
-                        //if on first line only return text
-                        if (some.isEmpty()) {
-                            text
-                        } else {
-                            "$some\n$text"
-                        }
-                    }
-                }
+                context.openFileInput(fileName).bufferedReader().readLines().joinToString("\n")
 
             } catch (e: IOException) {
                 return e.printStackTrace().toString()
